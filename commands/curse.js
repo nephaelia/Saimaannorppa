@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
-module.exports = { 
+module.exports = {
     data: new SlashCommandBuilder()
-	    .setName('curse')
-	    .setDescription('Replies with a random curse word or phrase'),
+       .setName('curse')
+       .setDescription('Replies with a random curse word or phrase'),
     async execute(interaction) {
         const curses = [
             'Fuck!',
@@ -14,7 +14,7 @@ module.exports = {
             'Asshole!',
             'Motherfucker!',
             'Schieße!',
-            'Fuck this shit!',-
+            'Fuck this shit!',
             'God damn it',
             'Fuck you',
             'Fuck off!',
@@ -26,7 +26,11 @@ module.exports = {
 			'Hey fuckface!',
 			'O shit waddup',
 			'Damn you all to Hell!',
+            'Dickhead!',
+			'Fuckwit!',
+			'Bollocks',
+			'Fuck this fucking fuck',
            ];
         const response = curses[Math.floor(Math.random() * curses.length)];
         await interaction.reply(response);
-	}};
+	} };
