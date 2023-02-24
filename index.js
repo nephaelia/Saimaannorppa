@@ -1,5 +1,6 @@
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
+const CURSES = require ('./CURSES.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -21,28 +22,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	} else if (commandName === 'p') {
 		await interaction.reply('Perkele!');
 	} else if (commandName ==='curse') {
-		const curses = [
-			'Fuck!',
-			'You son of a bitch',
-			'Bastard!',
-			'Perkele!',
-			'My arse!',
-			'Asshole!',
-			'Motherfucker!',
-			'Schieße!',
-			'Fuck this shit!',
-			'God damn it',
-			'Fuck you',
-			'Fuck off!',
-			'Stupid Dummy McDumb-Face!',
-			'Oh poop!',
-			'Holy shit!',
-			'Buttface',
-			'Cunt!',
-			'Hey fuckface!',
-			'O shit waddup',
-			'Damn you all to Hell!',
-		   ];
+		const curses = [CURSES];
 		   const response = curses[Math.floor(Math.random() * curses.length)];
 		await interaction.reply(response);
 	   }

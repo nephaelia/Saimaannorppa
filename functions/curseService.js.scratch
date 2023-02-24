@@ -1,0 +1,9 @@
+const CURSES = require ('./CURSES.json');
+const generateCurse =() => {
+    const curses = [CURSES];
+    return curses[Math.floor(Math.random()*curses.length)];
+}
+const executeCurseInternation =
+async (internation) => {
+    await interaction.reply(response);
+}
