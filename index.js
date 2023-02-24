@@ -1,6 +1,6 @@
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
-const CURSES = require ('./CURSES.json');
+const CURSES = require ('./enums/CURSES.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
