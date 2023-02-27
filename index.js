@@ -50,6 +50,10 @@ client.on(Events.InteractionCreate, async interaction => {
 			'Fuckwit!',
 			'Bollocks',
 			'Fuck this fucking fuck',
+			'Fucking shit balls',
+			'Poophead!',
+			'Madrachode!',
+			'Mother toad!',
 		];
 		const response = curses[Math.floor(Math.random() * curses.length)];
 		await interaction.reply(response);
