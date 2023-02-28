@@ -1,7 +1,16 @@
+// const Sequelize = require('sequelize');
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+// // is supposed to be in here according to discord.js tut? but i think I want to try having this info in ./config/db.config.js like in my other node projects
+//const sequelize = new Sequelize('database', 'user', 'password', {
+//	host: 'localhost',
+//	dialect: 'sqlite',
+//	logging: false,
+//	storage: 'database.sqlite',
+//});
 
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
