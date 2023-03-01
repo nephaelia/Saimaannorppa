@@ -8,6 +8,11 @@ const commands = [
 	new SlashCommandBuilder().setName('user').setDescription('Replies with user info!'),
 	new SlashCommandBuilder().setName('p').setDescription('Replies...'),
 	new SlashCommandBuilder().setName('ping').setDescription('Replies with pong!'),
+	new SlashCommandBuilder().setName('echo').setDescription('Replies with your input'),
+	new SlashCommandBuilder().setName('react').setDescription('Reacts with an emoji'),
+	new SlashCommandBuilder().setName('react-custom').setDescription('Reacts with a custom emoji'),
+	new SlashCommandBuilder().setName('fruits').setDescription('Reacts with fruit emoji'),
+	new SlashCommandBuilder().setName('vote').setDescription('Choose thumbs up or down'),
 ]
 	.map(command => command.toJSON());
 

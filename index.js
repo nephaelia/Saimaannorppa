@@ -56,10 +56,55 @@ client.on(Events.InteractionCreate, async interaction => {
 			'Mother toad!',
 			'Damn',
 			'Oh heck',
+			'Frak',
 		];
 		const response = curses[Math.floor(Math.random() * curses.length)];
 		await interaction.reply(response);
 	}
+	else if (commandName === 'react') {
+		const message = await interaction.reply({ content: 'You can react with Unicode emojis!', fetchReply: true });
+		message.react('😄');
+	} 
+	else if (commandName === 'react-custom') {
+		const message = await interaction.reply({ content: 'You can react with custom emojis!', fetchReply: true });
+		const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'MERULONGPEROPERO');
+		message.react(reactionEmoji);
+	} 
+	else if (commandName === 'fruits') {
+		const message = await interaction.reply({ content: 'Reacting with fruits!', fetchReply: true });
+		message.react('🍎')
+			.then(() => message.react('🍊'))
+			.then(() => message.react('🍇'))
+			.catch(() => console.error('One of the emojis failed to react.'));
+	}
+	else if (interaction.commandName === 'vote') {
+		const message = await interaction.reply({ content: 'Awaiting emojis...', fetchReply: true });
+		message.react('👍').then(() => message.react('👎'));
+
+		const filter = (reaction, user) => {
+			return ['👍', '👎'].includes(reaction.emoji.name) && user.id === interaction.user.id;
+		};
+
+		message.awaitReactions({ filter, max: 1, time: 60000, errors: ['time'] })
+			.then(collected => {
+				const reaction = collected.first();
+
+				if (reaction.emoji.name === '👍') {
+					interaction.followUp('You reacted with a thumbs up.');
+				} else {
+					interaction.followUp('You reacted with a thumbs down.');
+				}
+			})
+			.catch(collected => {
+				console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
+				interaction.followUp(`After a minute, only ${collected.size} out of 4 reacted.`);
+			});
+		}
+			
 });
 
 client.login(token);
+
+const { ActivityType } = require('discord.js');
+//client.user.setActivity('activity', { type: ActivityType.Watching });
+//client.user.setActivity(ActivityType, { name: 'Chilling' }

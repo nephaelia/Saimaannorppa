@@ -36,6 +36,7 @@ module.exports = {
 			'Mother toad!',
             'Damn',
             'Oh heck',
+            'Frak',
            ];
         const response = curses[Math.floor(Math.random() * curses.length)];
         await interaction.reply(response);
