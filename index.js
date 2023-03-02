@@ -62,13 +62,8 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply(response);
 	}
 	else if (commandName === 'react') {
-		const message = await interaction.reply({ content: 'You can react with Unicode emojis!', fetchReply: true });
+		const message = await interaction.reply({ content: 'I can react with Unicode emojis!', fetchReply: true });
 		message.react('😄');
-	} 
-	else if (commandName === 'react-custom') {
-		const message = await interaction.reply({ content: 'You can react with custom emojis!', fetchReply: true });
-		const reactionEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'MERULONGPEROPERO');
-		message.react(reactionEmoji);
 	} 
 	else if (commandName === 'fruits') {
 		const message = await interaction.reply({ content: 'Reacting with fruits!', fetchReply: true });
@@ -100,6 +95,10 @@ client.on(Events.InteractionCreate, async interaction => {
 				interaction.followUp(`After a minute, only ${collected.size} out of 4 reacted.`);
 			});
 		}
+		else if (commandName === 'react-custom') {
+			const message = await interaction.reply({ content: 'I can react with custom emoji!', fetchReply: true });
+			message.react('1080878662448070717');
+		} 
 			
 });
 
