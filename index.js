@@ -1,7 +1,23 @@
-const { Client, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Partials, GuildMember, Role, ActionRowBuilder, ButtonBuilder, ButtonStyle, Collector } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ 
+	intents: [
+		GatewayIntentBits.Guilds, 
+		GatewayIntentBits.GuildEmojisAndStickers, 
+		GatewayIntentBits.GuildMembers, 
+		GatewayIntentBits.GuildMessageReactions, 
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.GuildModeration
+	],
+	partials: [
+		Partials.Message,
+		Partials.Channel,
+		Partials.Reaction,
+		Partials.GuildMember,
+		Partials.User
+	]
+	 });
 
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
@@ -64,6 +80,10 @@ client.on(Events.InteractionCreate, async interaction => {
 	else if (commandName === 'react') {
 		const message = await interaction.reply({ content: 'I can react with Unicode emojis!', fetchReply: true });
 		message.react('😄');
+	}
+	else if (commandName === 'react-saima') {
+		const message = await interaction.reply({ content: 'I can react with an emoji of myself!', fetchReply: true });
+		message.react('1078002115353526303');
 	} 
 	else if (commandName === 'fruits') {
 		const message = await interaction.reply({ content: 'Reacting with fruits!', fetchReply: true });
@@ -94,12 +114,39 @@ client.on(Events.InteractionCreate, async interaction => {
 				console.log(`After a minute, only ${collected.size} out of 4 reacted.`);
 				interaction.followUp(`After a minute, only ${collected.size} out of 4 reacted.`);
 			});
-		}
-		else if (commandName === 'react-custom') {
-			const message = await interaction.reply({ content: 'I can react with custom emoji!', fetchReply: true });
-			message.react('1080878662448070717');
-		} 
-			
+	}
+
+	if (interaction.commandName === 'button') {
+		const wait = require('node:timers/promises').setTimeout;
+		const filter = i => i.customId === 'primary' && i.user.id === '122157285790187530';
+		const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 }); 
+		const row = new ActionRowBuilder()
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId('primary')
+					.setLabel('Click me!')
+					.setStyle(ButtonStyle.Primary),
+			);
+
+		await interaction.Reply({ content: 'I think you should', components: [row] })
+		collector.on('collect', async i => {
+			if (i.customId === 'primary') {
+				await i.deferUpdate();
+				await wait(1000);
+				await i.editReply({ content: 'A button was clicked!', components: [] });
+			}
+
+		});
+		collector.on('end', async collected => {
+			console.log(`Collected ${collected.size} items`);
+			await interaction.followUp(`Collected ${collected.size} clicks!`);
+		});
+	}
+	if (!interaction.isUserContextMenuCommand()) return;
+		const { username } = interaction.targetUser;
+		console.log(username);
+		const message = await interaction.reply(`hello`)
+
 });
 
 client.login(token);
