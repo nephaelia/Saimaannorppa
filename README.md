@@ -1,2 +1,5 @@
-My very first Discord bot!
-Named after the endangered species of Finnish seal.
+My very first Discord bot! <br />
+Named after the endangered species of Finnish seal. <br />
+I have not yet included any sort of license to my own project because I am still learning, and much of the code here is compiled from tutorials I find elsewhere, which I'll link in this file. Sometimes, it's thanks to some of my friends who work in the tech industry professionally who help me out with potential ideas and solutions. When I edit things down more and add more of my own original ideas, I'll update with TOU and a license, but for now all I ask is that my sort of character concept of Saimaannorppa is attributed to me, and if you would like to follow her development to please watch or star this repo and consider joining my development Discord server at https://discord.gg/N4cRgkUcKR <br />
+As far as the code itself goes, I'll cite my sources when I find any new ones below, so please refer to them: <br />
+- Mainly, I'm following the tutorials and basing my code off of that found at https://discordjs.guide/ <br />

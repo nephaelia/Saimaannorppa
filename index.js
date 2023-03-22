@@ -26,7 +26,9 @@ client.commands = new Collection();
 
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-
+// First, path.join() helps to construct a path to the commands directory. 
+// The fs.readdirSync() method then reads the path to the directory and returns an array of all the file names it contains, currently ['ping.js', 'server.js', 'user.js']. 
+// To ensure only command files get processed, Array.filter() removes any non-JavaScript files from the array.
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
